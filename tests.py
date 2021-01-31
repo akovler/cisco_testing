@@ -1,6 +1,6 @@
 import  logging
 import requests,sys
-import psutil # to kill proces with subprocesses
+import psutil # to kill process with subprocesses
 from subprocess import Popen
 
 logging.basicConfig(level=logging.DEBUG,
@@ -28,7 +28,7 @@ def kill_proc_tree(pid, including_parent=True):
     if including_parent:
         parent.kill()
         parent.wait(5)
-
+#test put request
 def test_put(key,value):
     tmpdict={}
     tmpdict['key'] = key
@@ -38,33 +38,35 @@ def test_put(key,value):
         print(rc.json())
         logger.info("Success put item={}\n".format(rc.json()))
     else:
-        logger.error("Error get request with parameter item={0}, rc= {1}\n".format(tmpdict, rc.status_code))
-        exit()
-    rc = requests.get(base_url + '//' + tmpdict['key'])
+        if rc.status_code!=404:
+            logger.error("Error put request with parameter item={0}, rc= {1}\n".format(tmpdict, rc.status_code))
+            # exit()
+        else:
+            logger.info("Result put request with parameter item={0}, rc= {1}\n".format(tmpdict, rc.status_code))
+    rc = requests.get(base_url + '/' + tmpdict['key'])
     if rc.ok:
         print(rc.json())
         logger.info("Success get item={}(for put request)\n".format(rc.json()))
     else:
         logger.error(
-            "Error get request with parameter item={0}(for put request), rc= {1}\n".format(tmpdict, rc.status_code))
-        exit()
+            "Result get request with parameter item={0}(for put request), rc= {1}\n".format(tmpdict, rc.status_code))
 
+#test delete request
 def test_delete(key):
     rc = requests.delete(base_url + '/' + key)
     if rc.ok:
         print(rc.json())
         logger.info("Success delete item={}\n".format(rc.json()))
     else:
-        logger.error("Error deltete item={0}, rc= {1}\n".format(tmpdict, rc.status_code))
-        # res.close()
-        exit()
-    rc = requests.get(base_url + '//' + tmpdict['key'])
+        logger.error("Error delete key={0}, rc= {1}\n".format(key, rc.status_code))
+
+    rc = requests.get(base_url + '/' + tmpdict['key'])
     if rc.ok:
         print(rc.json())
         logger.info("Success get item={}(testing 'delete')\n".format(rc.json()))
     else:
         logger.info(
-            "Error get request with parameter(testing 'delete') item={0}, rc= {1}\n".format(tmpdict, rc.status_code))
+            "Result get request with parameter(testing 'delete') key={0}, rc= {1}\n".format(key, rc.status_code))
 
 
 try:
@@ -85,7 +87,7 @@ try:
         else:
             if rc.status_code !=409:
                 logger.error("Error post item={0}, rc= {1}\n".format(item,rc.status_code))
-                exit()
+                # exit()
             else:
                 logger.info("409 rc for post item={}\n".format(item))
     #2. testing 'get all' request
@@ -95,7 +97,7 @@ try:
         logger.info("Success get all items={}\n".format(rc.json()))
     else:
         logger.error("Error get all items={0}, rc= {1}\n".format(item,rc.status_code))
-        exit()
+        # exit()
 
     #3. testing 'get with parameter' request
     for item in postdict:
@@ -105,7 +107,7 @@ try:
             logger.info("Success get item={}\n".format(rc.json()))
         else:
             logger.error("Error get request with parameter item={0}, rc= {1}\n".format(item, rc.status_code))
-            exit()
+            # exit()
     #4. testing 'put' request
     test_put(postdict[0]['key'],'kuku')#existing key
     test_put('somekey', 'somevalue')#arbitrary key,value
@@ -113,6 +115,9 @@ try:
     tmpdict = postdict[0]
     test_delete(tmpdict['key']) #existing key
     test_delete('kuku')#arbitrary key
+    # 6. testing 'HEAD','CONNECT','OPTIONS','TRACE','PATCH' requests
+    rc = requests.patch(base_url )
+    logger.info("Result of 'patch' request={}\n".format(rc.status_code))
 
     print ("test ended")
 finally:

@@ -1,42 +1,65 @@
-01-30 19:49 urllib3.connectionpool DEBUG    Starting new HTTP connection (1): localhost:5000
-01-30 19:49 urllib3.connectionpool DEBUG    http://localhost:5000 "POST /kvstore HTTP/1.1" 201 30
-01-30 19:49 root         INFO     Success post item={'key': 'foo', 'value': 'bar'}
+01-31 14:36 urllib3.connectionpool DEBUG    Starting new HTTP connection (1): localhost:5000
+01-31 14:36 urllib3.connectionpool DEBUG    http://localhost:5000 "POST /kvstore HTTP/1.1" 201 30
+01-31 14:36 root         INFO     Success post item={'key': 'foo', 'value': 'bar'}
 
-01-30 19:49 urllib3.connectionpool DEBUG    Starting new HTTP connection (1): localhost:5000
-01-30 19:49 urllib3.connectionpool DEBUG    http://localhost:5000 "POST /kvstore HTTP/1.1" 201 32
-01-30 19:49 root         INFO     Success post item={'key': 'foo1', 'value': 'bar1'}
+01-31 14:36 urllib3.connectionpool DEBUG    Starting new HTTP connection (1): localhost:5000
+01-31 14:36 urllib3.connectionpool DEBUG    http://localhost:5000 "POST /kvstore HTTP/1.1" 201 32
+01-31 14:36 root         INFO     Success post item={'key': 'foo1', 'value': 'bar1'}
 
-01-30 19:49 urllib3.connectionpool DEBUG    Starting new HTTP connection (1): localhost:5000
-01-30 19:49 urllib3.connectionpool DEBUG    http://localhost:5000 "POST /kvstore HTTP/1.1" 409 0
-01-30 19:49 root         INFO     409 rc for post item={'key': 'foo', 'value': 'bar'}
+01-31 14:36 urllib3.connectionpool DEBUG    Starting new HTTP connection (1): localhost:5000
+01-31 14:36 urllib3.connectionpool DEBUG    http://localhost:5000 "POST /kvstore HTTP/1.1" 409 0
+01-31 14:36 root         INFO     409 rc for post item={'key': 'foo', 'value': 'bar'}
 
-01-30 19:49 urllib3.connectionpool DEBUG    Starting new HTTP connection (1): localhost:5000
-01-30 19:49 urllib3.connectionpool DEBUG    http://localhost:5000 "GET /kvstore HTTP/1.1" 200 30
-01-30 19:49 root         INFO     Success get all items={'foo': 'bar', 'foo1': 'bar1'}
+01-31 14:36 urllib3.connectionpool DEBUG    Starting new HTTP connection (1): localhost:5000
+01-31 14:36 urllib3.connectionpool DEBUG    http://localhost:5000 "GET /kvstore HTTP/1.1" 200 30
+01-31 14:36 root         INFO     Success get all items={'foo': 'bar', 'foo1': 'bar1'}
 
-01-30 19:49 urllib3.connectionpool DEBUG    Starting new HTTP connection (1): localhost:5000
-01-30 19:49 urllib3.connectionpool DEBUG    http://localhost:5000 "GET /kvstore/foo HTTP/1.1" 200 30
-01-30 19:49 root         INFO     Success get item={'key': 'foo', 'value': 'bar'}
+01-31 14:36 urllib3.connectionpool DEBUG    Starting new HTTP connection (1): localhost:5000
+01-31 14:36 urllib3.connectionpool DEBUG    http://localhost:5000 "GET /kvstore/foo HTTP/1.1" 200 30
+01-31 14:36 root         INFO     Success get item={'key': 'foo', 'value': 'bar'}
 
-01-30 19:49 urllib3.connectionpool DEBUG    Starting new HTTP connection (1): localhost:5000
-01-30 19:49 urllib3.connectionpool DEBUG    http://localhost:5000 "GET /kvstore/foo1 HTTP/1.1" 200 32
-01-30 19:49 root         INFO     Success get item={'key': 'foo1', 'value': 'bar1'}
+01-31 14:36 urllib3.connectionpool DEBUG    Starting new HTTP connection (1): localhost:5000
+01-31 14:36 urllib3.connectionpool DEBUG    http://localhost:5000 "GET /kvstore/foo1 HTTP/1.1" 200 32
+01-31 14:36 root         INFO     Success get item={'key': 'foo1', 'value': 'bar1'}
 
-01-30 19:49 urllib3.connectionpool DEBUG    Starting new HTTP connection (1): localhost:5000
-01-30 19:49 urllib3.connectionpool DEBUG    http://localhost:5000 "GET /kvstore/foo HTTP/1.1" 200 30
-01-30 19:49 root         INFO     Success get item={'key': 'foo', 'value': 'bar'}
+01-31 14:36 urllib3.connectionpool DEBUG    Starting new HTTP connection (1): localhost:5000
+01-31 14:36 urllib3.connectionpool DEBUG    http://localhost:5000 "GET /kvstore/foo HTTP/1.1" 200 30
+01-31 14:36 root         INFO     Success get item={'key': 'foo', 'value': 'bar'}
 
-01-30 19:49 urllib3.connectionpool DEBUG    Starting new HTTP connection (1): localhost:5000
-01-30 19:49 urllib3.connectionpool DEBUG    http://localhost:5000 "PUT /kvstore HTTP/1.1" 200 31
-01-30 19:49 root         INFO     Success put item={'key': 'foo', 'value': 'kuku'}
+01-31 14:36 urllib3.connectionpool DEBUG    Starting new HTTP connection (1): localhost:5000
+01-31 14:36 urllib3.connectionpool DEBUG    http://localhost:5000 "PUT /kvstore HTTP/1.1" 200 31
+01-31 14:36 root         INFO     Success put item={'key': 'foo', 'value': 'kuku'}
 
-01-30 19:49 urllib3.connectionpool DEBUG    Starting new HTTP connection (1): localhost:5000
-01-30 19:49 urllib3.connectionpool DEBUG    http://localhost:5000 "GET /kvstore//foo HTTP/1.1" 308 273
-01-30 19:49 urllib3.connectionpool DEBUG    Resetting dropped connection: localhost
-01-30 19:49 urllib3.connectionpool DEBUG    http://localhost:5000 "GET /kvstore/foo HTTP/1.1" 200 31
-01-30 19:49 root         INFO     Success get item={'key': 'foo', 'value': 'kuku'}(for put request)
+01-31 14:36 urllib3.connectionpool DEBUG    Starting new HTTP connection (1): localhost:5000
+01-31 14:36 urllib3.connectionpool DEBUG    http://localhost:5000 "GET /kvstore/foo HTTP/1.1" 200 31
+01-31 14:36 root         INFO     Success get item={'key': 'foo', 'value': 'kuku'}(for put request)
 
-01-30 19:49 urllib3.connectionpool DEBUG    Starting new HTTP connection (1): localhost:5000
-01-30 19:49 urllib3.connectionpool DEBUG    http://localhost:5000 "PUT /kvstore HTTP/1.1" 404 0
-01-30 19:49 root         ERROR    Error get request with parameter item={'key': 'somekey', 'value': 'somevalue'}, rc= 404
+01-31 14:36 urllib3.connectionpool DEBUG    Starting new HTTP connection (1): localhost:5000
+01-31 14:36 urllib3.connectionpool DEBUG    http://localhost:5000 "PUT /kvstore HTTP/1.1" 404 0
+01-31 14:36 root         INFO     Result put request with parameter item={'key': 'somekey', 'value': 'somevalue'}, rc= 404
 
+01-31 14:36 urllib3.connectionpool DEBUG    Starting new HTTP connection (1): localhost:5000
+01-31 14:36 urllib3.connectionpool DEBUG    http://localhost:5000 "GET /kvstore/somekey HTTP/1.1" 404 0
+01-31 14:36 root         ERROR    Result get request with parameter item={'key': 'somekey', 'value': 'somevalue'}(for put request), rc= 404
+
+01-31 14:36 urllib3.connectionpool DEBUG    Starting new HTTP connection (1): localhost:5000
+01-31 14:36 urllib3.connectionpool DEBUG    http://localhost:5000 "DELETE /kvstore/foo HTTP/1.1" 200 31
+01-31 14:36 root         INFO     Success delete item={'key': 'foo', 'value': 'kuku'}
+
+01-31 14:36 urllib3.connectionpool DEBUG    Starting new HTTP connection (1): localhost:5000
+01-31 14:36 urllib3.connectionpool DEBUG    http://localhost:5000 "GET /kvstore/foo HTTP/1.1" 404 0
+01-31 14:36 root         INFO     Result get request with parameter(testing 'delete') key=foo, rc= 404
+
+01-31 14:36 urllib3.connectionpool DEBUG    Starting new HTTP connection (1): localhost:5000
+01-31 14:36 urllib3.connectionpool DEBUG    http://localhost:5000 "DELETE /kvstore/kuku HTTP/1.1" 404 0
+01-31 14:36 root         ERROR    Error delete key=kuku, rc= 404
+
+01-31 14:36 urllib3.connectionpool DEBUG    Starting new HTTP connection (1): localhost:5000
+01-31 14:36 urllib3.connectionpool DEBUG    http://localhost:5000 "GET /kvstore/foo HTTP/1.1" 404 0
+01-31 14:36 root         INFO     Result get request with parameter(testing 'delete') key=kuku, rc= 404
+
+01-31 14:36 urllib3.connectionpool DEBUG    Starting new HTTP connection (1): localhost:5000
+01-31 14:36 urllib3.connectionpool DEBUG    http://localhost:5000 "PATCH /kvstore HTTP/1.1" 405 0
+01-31 14:36 root         INFO     Result of 'patch' request=405
+
+01-31 14:36 root         INFO     Terminating FLASK application

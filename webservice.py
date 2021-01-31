@@ -2,8 +2,8 @@ from flask import Flask, request, Response, json
 app = Flask(__name__)
 mydict={}
 @app.route('/kvstore',methods=['POST'])
-
 def post_route():
+    name = request.cookies.get('userID')
     data = request.get_data()
     s = data.decode("utf-8")
     pl = json.loads(s)
@@ -87,4 +87,4 @@ def getother_route():
 #curl -X CONNECT  -I -w "%{http_code}" localhost:5000/kvstore
 
 if __name__ == "__main__":
-    app.run(debug=True, use_reloader=True)
+    app.run(debug=True, use_reloader=True,threaded=True)
