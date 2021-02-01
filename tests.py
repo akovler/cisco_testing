@@ -43,13 +43,7 @@ def test_put(key,value):
             # exit()
         else:
             logger.info("Result put request with parameter item={0}, rc= {1}\n".format(tmpdict, rc.status_code))
-    rc = requests.get(base_url + '/' + tmpdict['key'])
-    if rc.ok:
-        print(rc.json())
-        logger.info("Success get item={}(for put request)\n".format(rc.json()))
-    else:
-        logger.error(
-            "Result get request with parameter item={0}(for put request), rc= {1}\n".format(tmpdict, rc.status_code))
+    test_get(key)
 
 #test delete request
 def test_delete(key):
@@ -60,14 +54,35 @@ def test_delete(key):
     else:
         logger.error("Error delete key={0}, rc= {1}\n".format(key, rc.status_code))
 
-    rc = requests.get(base_url + '/' + tmpdict['key'])
+    test_get(key)
+
+def test_post(item):
+    rc = requests.post(base_url, json=item)
     if rc.ok:
         print(rc.json())
-        logger.info("Success get item={}(testing 'delete')\n".format(rc.json()))
+        logger.info("Success post item={}\n".format(rc.json()))
     else:
-        logger.info(
-            "Result get request with parameter(testing 'delete') key={0}, rc= {1}\n".format(key, rc.status_code))
-
+        if rc.status_code != 409:
+            logger.error("Error post item={0}, rc= {1}\n".format(item, rc.status_code))
+            # exit()
+        else:
+            logger.info("409 rc for post item={}\n".format(item))
+def test_get(item):
+    rc = requests.get(base_url + '/' + item)
+    if rc.ok:
+        print(rc.json())
+        logger.info("Success get item={}\n".format(rc.json()))
+    else:
+        logger.error("Error get request with parameter item={0}, rc= {1}\n".format(item, rc.status_code))
+        # exit()
+def test_getall():
+    rc = requests.get(base_url)
+    if rc.ok:
+        print(rc.json())
+        logger.info("Success get all items={}\n".format(rc.json()))
+    else:
+        logger.error("Error get all items, rc= {0}\n".format(rc.status_code))
+        # exit()
 
 try:
     postdict=[{"key":"foo","value":"bar"},{"key":"foo1","value":"bar1"},{"key":"foo","value":"bar"}]
@@ -80,41 +95,24 @@ try:
 
     #1. testing 'post' request
     for item in postdict:
-        rc = requests.post(base_url, json=item)
-        if rc.ok:
-            print (rc.json())
-            logger.info("Success post item={}\n".format(rc.json()))
-        else:
-            if rc.status_code !=409:
-                logger.error("Error post item={0}, rc= {1}\n".format(item,rc.status_code))
-                # exit()
-            else:
-                logger.info("409 rc for post item={}\n".format(item))
+        test_post(item)
+
     #2. testing 'get all' request
-    rc = requests.get(base_url)
-    if rc.ok:
-        print(rc.json())
-        logger.info("Success get all items={}\n".format(rc.json()))
-    else:
-        logger.error("Error get all items={0}, rc= {1}\n".format(item,rc.status_code))
-        # exit()
+    test_getall()
 
     #3. testing 'get with parameter' request
     for item in postdict:
-        rc = requests.get(base_url+'/'+item['key'])
-        if rc.ok:
-            print (rc.json())
-            logger.info("Success get item={}\n".format(rc.json()))
-        else:
-            logger.error("Error get request with parameter item={0}, rc= {1}\n".format(item, rc.status_code))
-            # exit()
+        test_get(item['key'])
+
     #4. testing 'put' request
-    test_put(postdict[0]['key'],'kuku')#existing key
-    test_put('somekey', 'somevalue')#arbitrary key,value
-    #5. testing 'delete' request
     tmpdict = postdict[0]
+    test_put(tmpdict['key'],'kuku')#existing key
+    test_put('somekey', 'somevalue')#arbitrary key,value
+
+    #5. testing 'delete' request
     test_delete(tmpdict['key']) #existing key
     test_delete('kuku')#arbitrary key
+
     # 6. testing 'HEAD','CONNECT','OPTIONS','TRACE','PATCH' requests
     rc = requests.patch(base_url )
     logger.info("Result of 'patch' request={}\n".format(rc.status_code))
